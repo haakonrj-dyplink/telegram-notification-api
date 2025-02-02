@@ -25,7 +25,7 @@ function sendNotification(message: string) {
 app.post('/notify', (req: Request, res: Response, next) => {
   try {
     const { message } = req.body;
-    console.log('Message:', message); 
+    console.log('Message:', message);
     if (!message) {
       throw new HttpError(400, 'Message is required');
     }
@@ -37,12 +37,15 @@ app.post('/notify', (req: Request, res: Response, next) => {
   }
 });
 
+app.get('/', (req: Request, res: Response) => {
+  res.send('Hello World!');
+});
+
 // Listen for "/status" command
 bot.onText(/\/status/, (msg) => {
   const chatId = msg.chat.id;
-  bot.sendMessage(chatId, "✅ Server is running smoothly!");
+  bot.sendMessage(chatId, '✅ Server is running smoothly!');
 });
-
 
 const PORT = apiConfig.PORT;
 app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
